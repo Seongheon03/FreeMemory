@@ -1,0 +1,161 @@
+﻿<Window x:Class="FreeMemory.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FreeMemory.View"
+        mc:Ignorable="d" WindowStyle="None" 
+        ResizeMode="NoResize" 
+        Background="Transparent" AllowsTransparency="True"
+        Icon="/Resources/icon.ico"
+        WindowStartupLocation="CenterScreen"
+        Title="RegisterWindow" Height="400" Width="350">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Cursor" Value="Hand"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Padding" Value="7"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border CornerRadius="5"
+                                Background="#E5E5E5">
+                            <Grid>
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                                      VerticalAlignment="Center"
+                                                      Margin="10 0 0 0"
+                                                      Cursor="IBeam"/>
+                                <TextBlock x:Name="SearchTag"
+                                                   Foreground="DarkGray"
+                                                   Visibility="Collapsed"
+                                                   VerticalAlignment="Center"
+                                                   Text="{TemplateBinding Tag}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="SearchTag" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type PasswordBox}">
+            <Setter Property="Width" Value="200"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Padding" Value="7"/>
+            <Setter Property="local:PasswordBoxMonitor.IsMonitoring" Value="True"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type PasswordBox}">
+                        <Border CornerRadius="5"
+                                Background="#E5E5E5">
+                            <Grid>
+                                <ScrollViewer x:Name="PART_ContentHost"
+                                          VerticalAlignment="Center"
+                                          Margin="10 0 0 0"
+                                          Cursor="IBeam"/>
+                                <TextBlock x:Name="WaterMark" 
+                                       Foreground="DarkGray"
+                                       VerticalAlignment="Center"
+                                       Visibility="Collapsed"
+                                       Text="{TemplateBinding Tag}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="local:PasswordBoxMonitor.PasswordLength" Value="0">
+                                <Setter TargetName="WaterMark" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </Window.Resources>
+    <Grid>
+        <Rectangle RadiusX="10" RadiusY="10" Fill="White" Width="350" Height="400">
+            <Rectangle.Effect>
+                <DropShadowEffect BlurRadius="30"/>
+            </Rectangle.Effect>
+        </Rectangle>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="회원가입" BorderThickness="0" Margin="0 0 0 20" FontWeight="UltraBold" Foreground="DimGray" FontSize="30"/>
+            <TextBox x:Name="tbId"
+                Width="250" Height="40" Margin="3" Background="#E5E5E5" BorderThickness="0" Foreground="DarkGray" Tag="    아이디" VerticalContentAlignment="Center" Padding="7"/>
+            <TextBox x:Name="tbEmail"
+                Width="250" Height="40" Margin="3" Background="#E5E5E5" BorderThickness="0" Foreground="DarkGray" Tag="    이메일" VerticalContentAlignment="Center" Padding="7"/>
+            <PasswordBox x:Name="pbPwd"
+                Width="250" Height="40" Margin="3" Background="#E5E5E5" BorderThickness="0" Foreground="DarkGray" Tag="    비밀번호" VerticalContentAlignment="Center" Padding="7"/>
+            <TextBox x:Name="tbName"
+                Width="250" Height="40" Margin="3" Background="#E5E5E5" BorderThickness="0" Foreground="DarkGray" Tag="    이름" VerticalContentAlignment="Center" Padding="7"/>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox x:Name="cbGrade" Width="79" Height="30" Margin="3" BorderThickness="0" Padding="8" SelectedIndex="0">
+                    <ComboBoxItem Content="1학년"/>
+                    <ComboBoxItem Content="2학년"/>
+                    <ComboBoxItem Content="3학년"/>
+                </ComboBox>
+                <ComboBox x:Name="cbClassroom" Width="79" Height="30" Margin="3" BorderThickness="0" Padding="8" SelectedIndex="0">
+                    <ComboBoxItem Content="1반"/>
+                    <ComboBoxItem Content="2반"/>
+                    <ComboBoxItem Content="3반"/>
+                </ComboBox>
+                <ComboBox x:Name="cbNumber" Width="79" Height="30" Margin="3" BorderThickness="0" Padding="8" SelectedIndex="0">
+                    <ComboBoxItem Content="1번"/>
+                    <ComboBoxItem Content="2번"/>
+                    <ComboBoxItem Content="3번"/>
+                    <ComboBoxItem Content="4번"/>
+                    <ComboBoxItem Content="5번"/>
+                    <ComboBoxItem Content="6번"/>
+                    <ComboBoxItem Content="7번"/>
+                    <ComboBoxItem Content="8번"/>
+                    <ComboBoxItem Content="9번"/>
+                    <ComboBoxItem Content="10번"/>
+                    <ComboBoxItem Content="11번"/>
+                    <ComboBoxItem Content="12번"/>
+                    <ComboBoxItem Content="13번"/>
+                    <ComboBoxItem Content="14번"/>
+                    <ComboBoxItem Content="15번"/>
+                    <ComboBoxItem Content="16번"/>
+                    <ComboBoxItem Content="17번"/>
+                    <ComboBoxItem Content="18번"/>
+                    <ComboBoxItem Content="19번"/>
+                    <ComboBoxItem Content="20번"/>
+                    <ComboBoxItem Content="21번"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Name="stackPanel2" Orientation="Horizontal"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Margin="0 15 30 0" Height="20" Content="취소" Foreground="Gray" Click="btnCancle_Click" FontSize="15"/>
+                <Button Margin="0 15 0 0" Height="20" Content="회원가입" Foreground="Gray" Click="btnRegister_Click" FontSize="15"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>
